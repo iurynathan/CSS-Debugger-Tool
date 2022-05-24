@@ -32,15 +32,18 @@ class LineDelimiters {
     })
   }
 
-  insertEventsToElements () {
-    Array.from(this.elements).forEach((element, i) => {
+  async insertEventsToElements () {
+    await Array.from(this.elements).reduce(async (acc, element) => {
+      await acc
+      const randomIndex = Math.floor(Math.random() * (50 - 0)) + 0
+
       element.onmouseover = () => {
-        this.addLinesDelimiters(element, this.convertHexToRgba(this.colors[i]))
+        this.addLinesDelimiters(element, this.convertHexToRgba(this.colors[randomIndex]))
       }
       element.onmouseleave = () => {
-        this.removeLinesDelimiters(element, this.convertHexToRgba(this.colors[i]))
+        this.removeLinesDelmiters(element, this.convertHexToRgba(this.colors[randomIndex]))
       }
-    })
+    }, Promise.resolve())
   }
 }
 
